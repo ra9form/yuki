@@ -1,0 +1,19 @@
+apt:
+  update: true
+
+env:
+  - PROTOBUF_VERSION=3.3.0
+  - PROTOBUF_VERSION=3.6.0
+
+before_install:
+  - ./install-protobuf.sh
+  - PATH=/home/travis/bin:$PATH protoc --version
+
+script:
+  - GO111MODULE=on PATH=/home/travis/bin:$GOPATH/bin:$PATH make integration
+
+language: go
+
+go:
+  - 1.12.x
+  - 1.13.x
