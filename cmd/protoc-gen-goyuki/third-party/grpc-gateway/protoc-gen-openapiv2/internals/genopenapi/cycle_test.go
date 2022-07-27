@@ -24,7 +24,6 @@ func TestCycle(t *testing.T) {
 			attempt: 1001,
 		},
 	} {
-
 		c := newCycleChecker(tt.max)
 		var final bool
 		for i := 0; i < tt.attempt; i++ {

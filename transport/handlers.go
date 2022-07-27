@@ -3,8 +3,9 @@ package transport
 import (
 	"net/http"
 
-	"github.com/ra9form/yuki/transport/swagger"
 	"google.golang.org/grpc"
+
+	"github.com/ra9form/yuki/transport/swagger"
 )
 
 // Service is a registerable collection of endpoints.

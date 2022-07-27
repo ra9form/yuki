@@ -35,7 +35,7 @@ func (s Logrus) Logf(l Level, msg string, args ...interface{}) {
 }
 
 // Default logger implementation. For backward compatibility it is taken from
-// @link github.com/sirupsen/logrus@v1.0.5/text_formatter.go
+// @link github.com/sirupsen/logrus@v1.0.5/text_formatter.go.
 func (s Logrus) log(level Level, args ...interface{}) {
 	fmt.Println("time=" + time.Now().Format(time.RFC3339) +
 		" level=" + levelToString(level) +
@@ -47,7 +47,7 @@ func (s Logrus) log(level Level, args ...interface{}) {
 }
 
 // Convert the Level to a string.
-// @link github.com/sirupsen/logrus@v1.0.5/logrus.go
+// @link github.com/sirupsen/logrus@v1.0.5/logrus.go.
 func levelToString(l Level) string {
 	switch l {
 	case LevelDebug:

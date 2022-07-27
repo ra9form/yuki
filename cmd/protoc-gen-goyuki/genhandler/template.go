@@ -9,19 +9,18 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
 	"github.com/pkg/errors"
+	pbdescriptor "google.golang.org/protobuf/types/descriptorpb"
+
 	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/internal"
 	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/casing"
 	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
-	pbdescriptor "google.golang.org/protobuf/types/descriptorpb"
 )
 
 const (
 	nullableOption = "65001:0"
 )
 
-var (
-	errNoTargetService = errors.New("no target service defined in the file")
-)
+var errNoTargetService = errors.New("no target service defined in the file")
 
 var pkg map[string]string
 
@@ -194,7 +193,7 @@ func addValueTyped(f *descriptor.Field) string {
 	}
 
 	if valueVerb == "" && valueFormatter == "" {
-		// no way to proccess the type value, skipping
+		// no way to process the type value, skipping
 		return ""
 	}
 
@@ -226,7 +225,6 @@ func addValueTyped(f *descriptor.Field) string {
 values.Add(%q, %s)
 }`
 	return fmt.Sprintf(format, goName, f.GetName(), valueTemplater("in."+goName))
-
 }
 
 var (

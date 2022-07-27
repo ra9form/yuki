@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/casing"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/casing"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 )
 
 // IsWellKnownType returns true if the provided fully qualified type name is considered 'well-known'.
@@ -65,7 +66,7 @@ type File struct {
 	Services []*Service
 }
 
-// Pkg returns package name or alias if it's present
+// Pkg returns package name or alias if it's present.
 func (f *File) Pkg() string {
 	pkg := f.GoPkg.Name
 	if alias := f.GoPkg.Alias; alias != "" {
@@ -180,7 +181,7 @@ func (s *Service) FQSN() string {
 	return strings.Join(components, ".")
 }
 
-// InstanceName returns object name of the service with package prefix if needed
+// InstanceName returns object name of the service with package prefix if needed.
 func (s *Service) InstanceName() string {
 	if !s.ForcePrefixedName {
 		return s.GetName()
@@ -188,7 +189,7 @@ func (s *Service) InstanceName() string {
 	return fmt.Sprintf("%s.%s", s.File.Pkg(), s.GetName())
 }
 
-// ClientConstructorName returns name of the Client constructor with package prefix if needed
+// ClientConstructorName returns name of the Client constructor with package prefix if needed.
 func (s *Service) ClientConstructorName() string {
 	constructor := "New" + s.GetName() + "Client"
 	if !s.ForcePrefixedName {
@@ -264,7 +265,7 @@ func (f *Field) FQFN() string {
 	return strings.Join([]string{f.Message.FQMN(), f.GetName()}, ".")
 }
 
-// Parameter is a parameter provided in http requests
+// Parameter is a parameter provided in http requests.
 type Parameter struct {
 	// FieldPath is a path to a proto field which this parameter is mapped to.
 	FieldPath
@@ -314,7 +315,7 @@ func (p Parameter) IsProto2() bool {
 }
 
 // Body describes a http (request|response) body to be sent to the (method|client).
-// This is used in body and response_body options in google.api.HttpRule
+// This is used in body and response_body options in google.api.HttpRule.
 type Body struct {
 	// FieldPath is a path to a proto field which the (request|response) body is mapped to.
 	// The (request|response) body is mapped to the (request|response) type itself if FieldPath is empty.
@@ -401,7 +402,7 @@ func (p FieldPath) AssignableExpr(msgExpr string) string {
 	return strings.Join(preparations, "\n")
 }
 
-// FieldPathComponent is a path component in FieldPath
+// FieldPathComponent is a path component in FieldPath.
 type FieldPathComponent struct {
 	// Name is a name of the proto field which this component corresponds to.
 	// TODO(yugui) is this necessary?
@@ -456,7 +457,7 @@ var (
 		return result
 	}()
 
-	// TODO: replace it with a IIFE
+	// TODO: replace it with a IIFE.
 	proto3RepeatedConvertFuncs = map[descriptorpb.FieldDescriptorProto_Type]string{
 		descriptorpb.FieldDescriptorProto_TYPE_DOUBLE:  "runtime.Float64Slice",
 		descriptorpb.FieldDescriptorProto_TYPE_FLOAT:   "runtime.Float32Slice",

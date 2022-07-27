@@ -5,10 +5,11 @@ import (
 	"strings"
 
 	"github.com/golang/glog"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 	options "google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 )
 
 // loadServices registers services and their methods from "targetFile" to "r".

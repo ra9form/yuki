@@ -1,8 +1,9 @@
 package transport
 
 import (
-	"github.com/ra9form/yuki/transport/swagger"
 	"google.golang.org/grpc"
+
+	"github.com/ra9form/yuki/transport/swagger"
 )
 
 type CompoundServiceDesc struct {

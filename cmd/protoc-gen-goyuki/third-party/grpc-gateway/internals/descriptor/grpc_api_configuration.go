@@ -6,8 +6,9 @@ import (
 	"strings"
 
 	"github.com/ghodss/yaml"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/apiconfig"
 	"google.golang.org/protobuf/encoding/protojson"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/apiconfig"
 )
 
 func loadGrpcAPIServiceFromYAML(yamlFileContents []byte, yamlSourceLogName string) (*apiconfig.GrpcAPIService, error) {

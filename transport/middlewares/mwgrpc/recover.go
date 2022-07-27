@@ -1,9 +1,9 @@
 package mwgrpc
 
 import (
-	"github.com/ra9form/yuki/server/middlewares/mwgrpc"
-
 	"google.golang.org/grpc"
+
+	"github.com/ra9form/yuki/server/middlewares/mwgrpc"
 )
 
 // UnaryPanicHandler handles panics for UnaryHandlers.

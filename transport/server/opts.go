@@ -1,12 +1,12 @@
 package server
 
 import (
+	"github.com/go-chi/chi"
+	"google.golang.org/grpc"
+
 	"github.com/ra9form/yuki/server"
 	"github.com/ra9form/yuki/server/middlewares/mwhttp"
 	"github.com/ra9form/yuki/transport"
-
-	"github.com/go-chi/chi"
-	"google.golang.org/grpc"
 )
 
 // Option is an optional setting applied to the Server.

@@ -6,12 +6,13 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/codegenerator"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
 	"google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/codegenerator"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
 )
 
 // Registry is a registry of information extracted from pluginpb.CodeGeneratorRequest.
@@ -96,7 +97,7 @@ type Registry struct {
 	// messageOptions is a mapping of fully-qualified message name to additional OpenAPI message options
 	messageOptions map[string]*options.Schema
 
-	//serviceOptions is a mapping of fully-qualified service name to additional OpenAPI service options
+	// serviceOptions is a mapping of fully-qualified service name to additional OpenAPI service options
 	serviceOptions map[string]*options.Tag
 
 	// fieldOptions is a mapping of the fully-qualified name of the parent message concat
@@ -312,18 +313,18 @@ func (r *Registry) LookupFile(name string) (*File, error) {
 	return f, nil
 }
 
-// LookupExternalHTTPRules looks up external http rules by fully qualified service method name
+// LookupExternalHTTPRules looks up external http rules by fully qualified service method name.
 func (r *Registry) LookupExternalHTTPRules(qualifiedMethodName string) []*annotations.HttpRule {
 	return r.externalHTTPRules[qualifiedMethodName]
 }
 
-// AddExternalHTTPRule adds an external http rule for the given fully qualified service method name
+// AddExternalHTTPRule adds an external http rule for the given fully qualified service method name.
 func (r *Registry) AddExternalHTTPRule(qualifiedMethodName string, rule *annotations.HttpRule) {
 	r.externalHTTPRules[qualifiedMethodName] = append(r.externalHTTPRules[qualifiedMethodName], rule)
 }
 
 // UnboundExternalHTTPRules returns the list of External HTTPRules
-// which does not have a matching method in the registry
+// which does not have a matching method in the registry.
 func (r *Registry) UnboundExternalHTTPRules() []string {
 	allServiceMethods := make(map[string]struct{})
 	for _, f := range r.files {
@@ -355,17 +356,17 @@ func (r *Registry) SetPrefix(prefix string) {
 	r.prefix = prefix
 }
 
-// SetStandalone registers standalone flag to control package prefix
+// SetStandalone registers standalone flag to control package prefix.
 func (r *Registry) SetStandalone(standalone bool) {
 	r.standalone = standalone
 }
 
-// SetRecursiveDepth records the max recursion count
+// SetRecursiveDepth records the max recursion count.
 func (r *Registry) SetRecursiveDepth(count int) {
 	r.recursiveDepth = count
 }
 
-// GetRecursiveDepth returns the max recursion count
+// GetRecursiveDepth returns the max recursion count.
 func (r *Registry) GetRecursiveDepth() int {
 	return r.recursiveDepth
 }
@@ -385,7 +386,7 @@ func (r *Registry) ReserveGoPackageAlias(alias, pkgpath string) error {
 	return nil
 }
 
-// GetAllFQMNs returns a list of all FQMNs
+// GetAllFQMNs returns a list of all FQMNs.
 func (r *Registry) GetAllFQMNs() []string {
 	var keys []string
 	for k := range r.msgs {
@@ -394,7 +395,7 @@ func (r *Registry) GetAllFQMNs() []string {
 	return keys
 }
 
-// GetAllFQENs returns a list of all FQENs
+// GetAllFQENs returns a list of all FQENs.
 func (r *Registry) GetAllFQENs() []string {
 	var keys []string
 	for k := range r.enums {
@@ -409,29 +410,29 @@ func (r *Registry) SetAllowDeleteBody(allow bool) {
 	r.allowDeleteBody = allow
 }
 
-// SetAllowMerge controls whether generation one OpenAPI file out of multiple protos
+// SetAllowMerge controls whether generation one OpenAPI file out of multiple protos.
 func (r *Registry) SetAllowMerge(allow bool) {
 	r.allowMerge = allow
 }
 
-// IsAllowMerge whether generation one OpenAPI file out of multiple protos
+// IsAllowMerge whether generation one OpenAPI file out of multiple protos.
 func (r *Registry) IsAllowMerge() bool {
 	return r.allowMerge
 }
 
-// SetMergeFileName controls the target OpenAPI file name out of multiple protos
+// SetMergeFileName controls the target OpenAPI file name out of multiple protos.
 func (r *Registry) SetMergeFileName(mergeFileName string) {
 	r.mergeFileName = mergeFileName
 }
 
 // SetAllowRepeatedFieldsInBody controls whether repeated field can be used
-// in `body` and `response_body` (`google.api.http` annotation option) field path or not
+// in `body` and `response_body` (`google.api.http` annotation option) field path or not.
 func (r *Registry) SetAllowRepeatedFieldsInBody(allow bool) {
 	r.allowRepeatedFieldsInBody = allow
 }
 
 // IsAllowRepeatedFieldsInBody checks if repeated field can be used
-// in `body` and `response_body` (`google.api.http` annotation option) field path or not
+// in `body` and `response_body` (`google.api.http` annotation option) field path or not.
 func (r *Registry) IsAllowRepeatedFieldsInBody() bool {
 	return r.allowRepeatedFieldsInBody
 }
@@ -455,7 +456,7 @@ func (r *Registry) GetRepeatedPathParamSeparator() rune {
 }
 
 // GetRepeatedPathParamSeparatorName returns the name path parameter repeated
-// fields repeatedFieldSeparator. I.e. 'csv', 'pipe', 'ssv' or 'tsv'
+// fields repeatedFieldSeparator. I.e. 'csv', 'pipe', 'ssv' or 'tsv'.
 func (r *Registry) GetRepeatedPathParamSeparatorName() string {
 	return r.repeatedPathParamSeparator.name
 }
@@ -483,92 +484,92 @@ func (r *Registry) SetRepeatedPathParamSeparator(name string) error {
 	return nil
 }
 
-// SetUseJSONNamesForFields sets useJSONNamesForFields
+// SetUseJSONNamesForFields sets useJSONNamesForFields.
 func (r *Registry) SetUseJSONNamesForFields(use bool) {
 	r.useJSONNamesForFields = use
 }
 
-// GetUseJSONNamesForFields returns useJSONNamesForFields
+// GetUseJSONNamesForFields returns useJSONNamesForFields.
 func (r *Registry) GetUseJSONNamesForFields() bool {
 	return r.useJSONNamesForFields
 }
 
-// SetUseFQNForOpenAPIName sets useFQNForOpenAPIName
+// SetUseFQNForOpenAPIName sets useFQNForOpenAPIName.
 func (r *Registry) SetUseFQNForOpenAPIName(use bool) {
 	r.useFQNForOpenAPIName = use
 }
 
-// GetUseFQNForOpenAPIName returns useFQNForOpenAPIName
+// GetUseFQNForOpenAPIName returns useFQNForOpenAPIName.
 func (r *Registry) GetUseFQNForOpenAPIName() bool {
 	return r.useFQNForOpenAPIName
 }
 
-// GetMergeFileName return the target merge OpenAPI file name
+// GetMergeFileName return the target merge OpenAPI file name.
 func (r *Registry) GetMergeFileName() string {
 	return r.mergeFileName
 }
 
-// SetUseGoTemplate sets useGoTemplate
+// SetUseGoTemplate sets useGoTemplate.
 func (r *Registry) SetUseGoTemplate(use bool) {
 	r.useGoTemplate = use
 }
 
-// GetUseGoTemplate returns useGoTemplate
+// GetUseGoTemplate returns useGoTemplate.
 func (r *Registry) GetUseGoTemplate() bool {
 	return r.useGoTemplate
 }
 
-// SetEnumsAsInts set enumsAsInts
+// SetEnumsAsInts set enumsAsInts.
 func (r *Registry) SetEnumsAsInts(enumsAsInts bool) {
 	r.enumsAsInts = enumsAsInts
 }
 
-// GetEnumsAsInts returns enumsAsInts
+// GetEnumsAsInts returns enumsAsInts.
 func (r *Registry) GetEnumsAsInts() bool {
 	return r.enumsAsInts
 }
 
-// SetDisableDefaultErrors sets disableDefaultErrors
+// SetDisableDefaultErrors sets disableDefaultErrors.
 func (r *Registry) SetDisableDefaultErrors(use bool) {
 	r.disableDefaultErrors = use
 }
 
-// GetDisableDefaultErrors returns disableDefaultErrors
+// GetDisableDefaultErrors returns disableDefaultErrors.
 func (r *Registry) GetDisableDefaultErrors() bool {
 	return r.disableDefaultErrors
 }
 
-// SetSimpleOperationIDs sets simpleOperationIDs
+// SetSimpleOperationIDs sets simpleOperationIDs.
 func (r *Registry) SetSimpleOperationIDs(use bool) {
 	r.simpleOperationIDs = use
 }
 
-// GetSimpleOperationIDs returns simpleOperationIDs
+// GetSimpleOperationIDs returns simpleOperationIDs.
 func (r *Registry) GetSimpleOperationIDs() bool {
 	return r.simpleOperationIDs
 }
 
-// SetWarnOnUnboundMethods sets warnOnUnboundMethods
+// SetWarnOnUnboundMethods sets warnOnUnboundMethods.
 func (r *Registry) SetWarnOnUnboundMethods(warn bool) {
 	r.warnOnUnboundMethods = warn
 }
 
-// SetGenerateUnboundMethods sets generateUnboundMethods
+// SetGenerateUnboundMethods sets generateUnboundMethods.
 func (r *Registry) SetGenerateUnboundMethods(generate bool) {
 	r.generateUnboundMethods = generate
 }
 
-// SetOmitPackageDoc controls whether the generated code contains a package comment (if set to false, it will contain one)
+// SetOmitPackageDoc controls whether the generated code contains a package comment (if set to false, it will contain one).
 func (r *Registry) SetOmitPackageDoc(omit bool) {
 	r.omitPackageDoc = omit
 }
 
-// GetOmitPackageDoc returns whether a package comment will be omitted from the generated code
+// GetOmitPackageDoc returns whether a package comment will be omitted from the generated code.
 func (r *Registry) GetOmitPackageDoc() bool {
 	return r.omitPackageDoc
 }
 
-// RegisterOpenAPIOptions registers OpenAPI options
+// RegisterOpenAPIOptions registers OpenAPI options.
 func (r *Registry) RegisterOpenAPIOptions(opts *openapiconfig.OpenAPIOptions) error {
 	if opts == nil {
 		return nil
@@ -634,31 +635,31 @@ func (r *Registry) RegisterOpenAPIOptions(opts *openapiconfig.OpenAPIOptions) er
 	return nil
 }
 
-// GetOpenAPIFileOption returns a registered OpenAPI option for a file
+// GetOpenAPIFileOption returns a registered OpenAPI option for a file.
 func (r *Registry) GetOpenAPIFileOption(file string) (*options.Swagger, bool) {
 	opt, ok := r.fileOptions[file]
 	return opt, ok
 }
 
-// GetOpenAPIMethodOption returns a registered OpenAPI option for a method
+// GetOpenAPIMethodOption returns a registered OpenAPI option for a method.
 func (r *Registry) GetOpenAPIMethodOption(qualifiedMethod string) (*options.Operation, bool) {
 	opt, ok := r.methodOptions[qualifiedMethod]
 	return opt, ok
 }
 
-// GetOpenAPIMessageOption returns a registered OpenAPI option for a message
+// GetOpenAPIMessageOption returns a registered OpenAPI option for a message.
 func (r *Registry) GetOpenAPIMessageOption(qualifiedMessage string) (*options.Schema, bool) {
 	opt, ok := r.messageOptions[qualifiedMessage]
 	return opt, ok
 }
 
-// GetOpenAPIServiceOption returns a registered OpenAPI option for a service
+// GetOpenAPIServiceOption returns a registered OpenAPI option for a service.
 func (r *Registry) GetOpenAPIServiceOption(qualifiedService string) (*options.Tag, bool) {
 	opt, ok := r.serviceOptions[qualifiedService]
 	return opt, ok
 }
 
-// GetOpenAPIFieldOption returns a registered OpenAPI option for a field
+// GetOpenAPIFieldOption returns a registered OpenAPI option for a field.
 func (r *Registry) GetOpenAPIFieldOption(qualifiedField string) (*options.JSONSchema, bool) {
 	opt, ok := r.fieldOptions[qualifiedField]
 	return opt, ok

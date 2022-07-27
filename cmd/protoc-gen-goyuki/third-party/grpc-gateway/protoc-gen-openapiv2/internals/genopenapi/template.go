@@ -19,13 +19,14 @@ import (
 
 	"github.com/golang/glog"
 	openapi_options "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/casing"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 	"google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/known/structpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/casing"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 )
 
 // wktSchemas are the schemas of well-known-types.
@@ -147,7 +148,7 @@ func newCycleChecker(recursive int) *cycleChecker {
 }
 
 // Check returns whether name is still within recursion
-// toleration
+// toleration.
 func (c *cycleChecker) Check(name string) bool {
 	count, ok := c.m[name]
 	count = count + 1
@@ -485,6 +486,7 @@ func shouldExcludeField(name string, excluded []*descriptor.Field, reg *descript
 	}
 	return false
 }
+
 func filterOutExcludedFields(fields []string, excluded []*descriptor.Field, reg *descriptor.Registry) []string {
 	var filtered []string
 	for _, f := range fields {
@@ -703,6 +705,7 @@ func lookupMsgAndOpenAPIName(location, name string, reg *descriptor.Registry) (*
 // registriesSeen is used to memoise calls to resolveFullyQualifiedNameToOpenAPINames so
 // we don't repeat it unnecessarily, since it can take some time.
 var registriesSeen = map[*descriptor.Registry]map[string]string{}
+
 var registriesSeenMutex sync.Mutex
 
 // Take the names of every proto and "uniq-ify" them. The idea is to produce a
@@ -880,7 +883,6 @@ func renderServices(services []*descriptor.Service, paths openapiPathsObject, re
 				// Iterate over all the OpenAPI parameters
 				parameters := openapiParametersObject{}
 				for _, parameter := range b.PathParams {
-
 					var paramType, paramFormat, desc, collectionFormat, defaultValue string
 					var enumNames []string
 					var items *openapiItemsObject
@@ -1103,7 +1105,8 @@ func renderServices(services []*descriptor.Service, paths openapiPathsObject, re
 							Key: "error",
 							Value: openapiSchemaObject{
 								schemaCore: schemaCore{
-									Ref: fmt.Sprintf("#/definitions/%s", statusDef)},
+									Ref: fmt.Sprintf("#/definitions/%s", statusDef),
+								},
 							},
 						})
 					}
@@ -1928,9 +1931,13 @@ func goTemplateComments(comment string, data interface{}, reg *descriptor.Regist
 }
 
 var messageProtoPath = protoPathIndex(reflect.TypeOf((*descriptorpb.FileDescriptorProto)(nil)), "MessageType")
+
 var nestedProtoPath = protoPathIndex(reflect.TypeOf((*descriptorpb.DescriptorProto)(nil)), "NestedType")
+
 var packageProtoPath = protoPathIndex(reflect.TypeOf((*descriptorpb.FileDescriptorProto)(nil)), "Package")
+
 var serviceProtoPath = protoPathIndex(reflect.TypeOf((*descriptorpb.FileDescriptorProto)(nil)), "Service")
+
 var methodProtoPath = protoPathIndex(reflect.TypeOf((*descriptorpb.ServiceDescriptorProto)(nil)), "Method")
 
 func isProtoPathMatches(paths []int32, outerPaths []int32, typeName string, typeIndex int32, fieldPaths []int32) bool {

@@ -1,9 +1,10 @@
 package transport
 
 import (
+	"google.golang.org/grpc"
+
 	"github.com/ra9form/yuki/transport/httptransport"
 	"github.com/ra9form/yuki/transport/swagger"
-	"google.golang.org/grpc"
 )
 
 // DescOption modifies the ServiceDesc's behaviour.

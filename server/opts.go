@@ -3,12 +3,12 @@ package server
 import (
 	"net/http"
 
-	"github.com/ra9form/yuki/server/middlewares/mwhttp"
-	"github.com/ra9form/yuki/transport"
-
 	"github.com/go-chi/chi"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"google.golang.org/grpc"
+
+	"github.com/ra9form/yuki/server/middlewares/mwhttp"
+	"github.com/ra9form/yuki/transport"
 )
 
 // Option is an optional setting applied to the Server.

@@ -5,9 +5,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/ra9form/yuki/transport"
-
 	"github.com/pkg/errors"
+
+	"github.com/ra9form/yuki/transport"
 )
 
 // Server is a transport server.

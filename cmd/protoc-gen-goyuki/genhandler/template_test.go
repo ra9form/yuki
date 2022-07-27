@@ -4,7 +4,7 @@ import "testing"
 
 func Test_goTypeName(t *testing.T) {
 	tests := []struct {
-		in string
+		in   string
 		want string
 	}{
 		{"test", "Test"},

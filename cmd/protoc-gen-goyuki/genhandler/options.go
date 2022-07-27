@@ -22,14 +22,14 @@ type options struct {
 
 type Option func(*options)
 
-// SwaggerDef sets map of swagger.json per proto file
+// SwaggerDef sets map of swagger.json per proto file.
 func SwaggerDef(swaggerDef map[string][]byte) Option {
 	return func(o *options) {
 		o.SwaggerDef = swaggerDef
 	}
 }
 
-// SwaggerPath sets path to store separate swagger files
+// SwaggerPath sets path to store separate swagger files.
 func SwaggerPath(swaggerPath string) Option {
 	return func(o *options) {
 		o.SwaggerPath = swaggerPath
@@ -44,42 +44,42 @@ func ApplyDefaultMiddlewares(apply bool) Option {
 	}
 }
 
-// Impl sets Impl flag option (if true implementation will be generated)
+// Impl sets Impl flag option (if true implementation will be generated).
 func Impl(impl bool) Option {
 	return func(o *options) {
 		o.Impl = impl
 	}
 }
 
-// ImplPath sets path for implementation file
+// ImplPath sets path for implementation file.
 func ImplPath(path string) Option {
 	return func(o *options) {
 		o.ImplPath = path
 	}
 }
 
-// DescPath sets path for description and swagger file
+// DescPath sets path for description and swagger file.
 func DescPath(path string) Option {
 	return func(o *options) {
 		o.DescPath = path
 	}
 }
 
-// Force sets force mode for generation implementation
+// Force sets force mode for generation implementation.
 func Force(force bool) Option {
 	return func(o *options) {
 		o.Force = force
 	}
 }
 
-// ServiceSubDir sets impl generation into sub directory
+// ServiceSubDir sets impl generation into sub directory.
 func ServiceSubDir(subDir bool) Option {
 	return func(o *options) {
 		o.ServiceSubDir = subDir
 	}
 }
 
-// WithTests sets if it needs for unit tests generation
+// WithTests sets if it needs for unit tests generation.
 func WithTests(needTests bool) Option {
 	return func(o *options) {
 		o.WithTests = needTests

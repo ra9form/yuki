@@ -5,8 +5,9 @@ import (
 	"io/ioutil"
 
 	"github.com/ghodss/yaml"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
 	"google.golang.org/protobuf/encoding/protojson"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
 )
 
 func loadOpenAPIConfigFromYAML(yamlFileContents []byte, yamlSourceLogName string) (*openapiconfig.OpenAPIConfig, error) {

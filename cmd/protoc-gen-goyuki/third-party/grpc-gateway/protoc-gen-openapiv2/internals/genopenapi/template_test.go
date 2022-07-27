@@ -12,9 +12,6 @@ import (
 	"github.com/google/go-cmp/cmp"
 	openapi_options "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 	"google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/genproto/protobuf/field_mask"
 	"google.golang.org/protobuf/proto"
@@ -25,6 +22,10 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 	"google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 )
 
 var marshaler = &runtime.JSONPb{}
@@ -495,7 +496,7 @@ func TestMessageToQueryParametersNoRecursive(t *testing.T) {
 					Field: []*descriptorpb.FieldDescriptorProto{
 						{
 							Name: proto.String("field"),
-							//Label:  descriptorpb.FieldDescriptorProto_LABEL_OPTIONAL.Enum(),
+							// Label:  descriptorpb.FieldDescriptorProto_LABEL_OPTIONAL.Enum(),
 							Type:   descriptorpb.FieldDescriptorProto_TYPE_STRING.Enum(),
 							Number: proto.Int32(1),
 						},
@@ -1340,7 +1341,8 @@ func TestApplyTemplateExtensions(t *testing.T) {
 		},
 	}
 	verifyTemplateExtensions := func(t *testing.T, reg *descriptor.Registry, file *descriptor.File,
-		opts *openapiconfig.OpenAPIOptions) {
+		opts *openapiconfig.OpenAPIOptions,
+	) {
 		if err := AddErrorDefs(reg); err != nil {
 			t.Errorf("AddErrorDefs(%#v) failed with %v; want success", reg, err)
 			return
@@ -1518,7 +1520,7 @@ func TestApplyTemplateHeaders(t *testing.T) {
 	}
 	openapiOperation := openapi_options.Operation{
 		Responses: map[string]*openapi_options.Response{
-			"200": &openapi_options.Response{
+			"200": {
 				Description: "Testing Headers",
 				Headers: map[string]*openapi_options.Header{
 					"string": {
@@ -1550,7 +1552,8 @@ func TestApplyTemplateHeaders(t *testing.T) {
 		},
 	}
 	verifyTemplateHeaders := func(t *testing.T, reg *descriptor.Registry, file *descriptor.File,
-		opts *openapiconfig.OpenAPIOptions) {
+		opts *openapiconfig.OpenAPIOptions,
+	) {
 		if err := AddErrorDefs(reg); err != nil {
 			t.Errorf("AddErrorDefs(%#v) failed with %v; want success", reg, err)
 			return
@@ -1609,7 +1612,6 @@ func TestApplyTemplateHeaders(t *testing.T) {
 		}[0], response.Headers, "response.Headers"; !reflect.DeepEqual(is, want) {
 			t.Errorf("applyTemplate(%#v).%s = %s want to be %s", file, name, is, want)
 		}
-
 	}
 	t.Run("verify template options set via proto options", func(t *testing.T) {
 		file := newFile()
@@ -1823,7 +1825,6 @@ func TestValidateHeaderType(t *testing.T) {
 			}
 		}
 	}
-
 }
 
 func TestValidateDefaultValueType(t *testing.T) {
@@ -2019,7 +2020,6 @@ func TestValidateDefaultValueType(t *testing.T) {
 			}
 		}
 	}
-
 }
 
 func TestApplyTemplateRequestWithoutClientStreaming(t *testing.T) {
@@ -2735,7 +2735,7 @@ func generateMsgsForJSONReservedName() []*descriptor.Message {
 }
 
 func TestTemplateWithJsonCamelCase(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		input    string
 		expected string
 	}{
@@ -2764,7 +2764,7 @@ func TestTemplateWithJsonCamelCase(t *testing.T) {
 }
 
 func TestTemplateWithoutJsonCamelCase(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		input    string
 		expected string
 	}{
@@ -2792,7 +2792,7 @@ func TestTemplateWithoutJsonCamelCase(t *testing.T) {
 }
 
 func TestTemplateToOpenAPIPath(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		input    string
 		expected string
 	}{
@@ -2853,7 +2853,7 @@ func BenchmarkTemplateToOpenAPIPath(b *testing.B) {
 }
 
 func TestResolveFullyQualifiedNameToOpenAPIName(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		input                string
 		output               string
 		listOfFQMNs          []string
@@ -2909,7 +2909,7 @@ func TestResolveFullyQualifiedNameToOpenAPIName(t *testing.T) {
 }
 
 func TestFQMNtoOpenAPIName(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		input    string
 		expected string
 	}{
@@ -2950,15 +2950,15 @@ func TestSchemaOfField(t *testing.T) {
 		Description: "field description",
 	}
 
-	var fieldOptions = new(descriptorpb.FieldOptions)
+	fieldOptions := new(descriptorpb.FieldOptions)
 	proto.SetExtension(fieldOptions, openapi_options.E_Openapiv2Field, jsonSchema)
 
-	var requiredField = []annotations.FieldBehavior{annotations.FieldBehavior_REQUIRED}
-	var requiredFieldOptions = new(descriptorpb.FieldOptions)
+	requiredField := []annotations.FieldBehavior{annotations.FieldBehavior_REQUIRED}
+	requiredFieldOptions := new(descriptorpb.FieldOptions)
 	proto.SetExtension(requiredFieldOptions, annotations.E_FieldBehavior, requiredField)
 
-	var outputOnlyField = []annotations.FieldBehavior{annotations.FieldBehavior_OUTPUT_ONLY}
-	var outputOnlyOptions = new(descriptorpb.FieldOptions)
+	outputOnlyField := []annotations.FieldBehavior{annotations.FieldBehavior_OUTPUT_ONLY}
+	outputOnlyOptions := new(descriptorpb.FieldOptions)
 	proto.SetExtension(outputOnlyOptions, annotations.E_FieldBehavior, outputOnlyField)
 
 	tests := []test{
@@ -3646,15 +3646,15 @@ func TestRenderMessagesAsDefinition(t *testing.T) {
 		Required:    []string{"aRequiredField"},
 	}
 
-	var requiredField = new(descriptorpb.FieldOptions)
+	requiredField := new(descriptorpb.FieldOptions)
 	proto.SetExtension(requiredField, openapi_options.E_Openapiv2Field, jsonSchema)
 
-	var fieldBehaviorRequired = []annotations.FieldBehavior{annotations.FieldBehavior_REQUIRED}
-	var requiredFieldOptions = new(descriptorpb.FieldOptions)
+	fieldBehaviorRequired := []annotations.FieldBehavior{annotations.FieldBehavior_REQUIRED}
+	requiredFieldOptions := new(descriptorpb.FieldOptions)
 	proto.SetExtension(requiredFieldOptions, annotations.E_FieldBehavior, fieldBehaviorRequired)
 
-	var fieldBehaviorOutputOnlyField = []annotations.FieldBehavior{annotations.FieldBehavior_OUTPUT_ONLY}
-	var fieldBehaviorOutputOnlyOptions = new(descriptorpb.FieldOptions)
+	fieldBehaviorOutputOnlyField := []annotations.FieldBehavior{annotations.FieldBehavior_OUTPUT_ONLY}
+	fieldBehaviorOutputOnlyOptions := new(descriptorpb.FieldOptions)
 	proto.SetExtension(fieldBehaviorOutputOnlyOptions, annotations.E_FieldBehavior, fieldBehaviorOutputOnlyField)
 
 	tests := []struct {
@@ -4018,7 +4018,6 @@ func TestRenderMessagesAsDefinition(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.descr, func(t *testing.T) {
-
 			msgs := []*descriptor.Message{}
 			for _, msgdesc := range test.msgDescs {
 				msgdesc.Options = &descriptorpb.MessageOptions{}
@@ -4084,7 +4083,6 @@ func strPtr(s string) *string {
 }
 
 func TestUpdateOpenAPIDataFromComments(t *testing.T) {
-
 	tests := []struct {
 		descr                 string
 		openapiSwaggerObject  interface{}
@@ -4358,7 +4356,6 @@ func TestMessageOptionsWithGoTemplate(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.descr, func(t *testing.T) {
-
 			msgs := []*descriptor.Message{}
 			for _, msgdesc := range test.msgDescs {
 				msgdesc.Options = &descriptorpb.MessageOptions{}

@@ -1,4 +1,4 @@
 #!/bin/sh
 
-#make imports
-#make lint
+make imports
+make lint-fast

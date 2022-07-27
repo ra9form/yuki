@@ -2,8 +2,9 @@ package httptransport
 
 import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	"github.com/ra9form/yuki/transport/swagger"
 	"google.golang.org/grpc"
+
+	"github.com/ra9form/yuki/transport/swagger"
 )
 
 // DescOptions provides options for a ServiceDesc compiled code.

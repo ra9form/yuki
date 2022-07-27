@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"runtime/debug"
 
-	"github.com/ra9form/yuki/server/middlewares/mwcommon"
-
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+
+	"github.com/ra9form/yuki/server/middlewares/mwcommon"
 )
 
 // UnaryPanicHandler handles panics for UnaryHandlers.
@@ -23,7 +23,6 @@ func UnaryPanicHandler(logger interface{}) grpc.UnaryServerInterceptor {
 		}()
 		return handler(ctx, req)
 	}
-
 }
 
 // StreamPanicHandler handles panics for StreamHandlers.

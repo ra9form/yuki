@@ -3,12 +3,13 @@ package descriptor
 import (
 	"testing"
 
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor/openapiconfig"
 )
 
 func newGeneratorFromSources(req *pluginpb.CodeGeneratorRequest, sources ...string) (*protogen.Plugin, error) {

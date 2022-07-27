@@ -1,12 +1,12 @@
 package httptransport
 
 import (
+	"bufio"
+	"net"
 	"net/http"
 	"sync"
 
-	"bufio"
 	"github.com/pkg/errors"
-	"net"
 )
 
 // CodedResponseWriter saves a response code to be read later.

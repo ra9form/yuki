@@ -156,3 +156,5 @@ vendor/
 
 # ignore binaries for generating the example
 /doc/example/bin/**
+
+bin/

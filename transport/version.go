@@ -1,7 +1,6 @@
 package transport
 
 import (
-	// We need chi in go.mod, because generated code uses it anyway.
 	_ "github.com/go-chi/chi"
 )
 

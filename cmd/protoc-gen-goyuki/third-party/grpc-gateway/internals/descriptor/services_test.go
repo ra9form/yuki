@@ -5,11 +5,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/httprule"
 )
 
 func compilePath(t *testing.T, path string) httprule.Template {
@@ -779,7 +780,8 @@ func TestExtractServicesWithError(t *testing.T) {
 		// body field path not resolved
 		{
 			target: "path/to/example.proto",
-			srcs: []string{`
+			srcs: []string{
+				`
 						name: "path/to/example.proto",
 						package: "example"
 						message_type <
@@ -1002,7 +1004,8 @@ func TestExtractServicesWithError(t *testing.T) {
 		// unsupported path parameter type
 		{
 			target: "path/to/example.proto",
-			srcs: []string{`
+			srcs: []string{
+				`
 					name: "path/to/example.proto",
 					package: "example"
 					message_type <

@@ -2,9 +2,10 @@ package main
 
 import (
 	"github.com/golang/glog"
+	plugin "google.golang.org/protobuf/types/pluginpb"
+
 	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/protoc-gen-openapiv2/internals/genopenapi"
-	plugin "google.golang.org/protobuf/types/pluginpb"
 )
 
 func genSwaggerDef(reg *descriptor.Registry, req *plugin.CodeGeneratorRequest) (map[string][]byte, error) {

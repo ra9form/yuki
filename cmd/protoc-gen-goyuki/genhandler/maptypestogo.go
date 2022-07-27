@@ -5,7 +5,7 @@ import (
 )
 
 // copied from genswagger
-// used to provide types for path generator
+// used to provide types for path generator.
 func primitiveTypeToGo(t pbdescriptor.FieldDescriptorProto_Type) (format string) {
 	ret := ""
 	switch t {

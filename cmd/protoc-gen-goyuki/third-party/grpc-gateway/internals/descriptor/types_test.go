@@ -265,5 +265,4 @@ func TestGoType(t *testing.T) {
 	if got, want := enum.GoType("example"), "example.EnumName"; got != want {
 		t.Errorf("enum.GoType() = %q; want %q", got, want)
 	}
-
 }

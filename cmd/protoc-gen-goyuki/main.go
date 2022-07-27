@@ -3,17 +3,18 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/codegenerator"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
 
 	"github.com/golang/glog"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/genhandler"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 	"google.golang.org/protobuf/proto"
 	plugin "google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/genhandler"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/codegenerator"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 )
 
 var (
@@ -212,7 +213,7 @@ func emitResp(out io.Writer, resp *plugin.CodeGeneratorResponse) {
 	}
 }
 
-// extracted from grpc-gateway pre-1.13.0
+// extracted from grpc-gateway pre-1.13.0.
 func parseRequest(r io.Reader) (*plugin.CodeGeneratorRequest, error) {
 	input, err := ioutil.ReadAll(r)
 	if err != nil {

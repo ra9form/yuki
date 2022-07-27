@@ -7,11 +7,12 @@
 package openapiconfig
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	options "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -538,6 +539,7 @@ func file_internal_descriptor_openapiconfig_openapiconfig_proto_rawDescGZIP() []
 }
 
 var file_internal_descriptor_openapiconfig_openapiconfig_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+
 var file_internal_descriptor_openapiconfig_openapiconfig_proto_goTypes = []interface{}{
 	(*OpenAPIFileOption)(nil),    // 0: grpc.gateway.internal.descriptor.openapiconfig.OpenAPIFileOption
 	(*OpenAPIMethodOption)(nil),  // 1: grpc.gateway.internal.descriptor.openapiconfig.OpenAPIMethodOption
@@ -552,6 +554,7 @@ var file_internal_descriptor_openapiconfig_openapiconfig_proto_goTypes = []inter
 	(*options.Tag)(nil),          // 10: grpc.gateway.protoc_gen_openapiv2.options.Tag
 	(*options.JSONSchema)(nil),   // 11: grpc.gateway.protoc_gen_openapiv2.options.JSONSchema
 }
+
 var file_internal_descriptor_openapiconfig_openapiconfig_proto_depIdxs = []int32{
 	7,  // 0: grpc.gateway.internal.descriptor.openapiconfig.OpenAPIFileOption.option:type_name -> grpc.gateway.protoc_gen_openapiv2.options.Swagger
 	8,  // 1: grpc.gateway.internal.descriptor.openapiconfig.OpenAPIMethodOption.option:type_name -> grpc.gateway.protoc_gen_openapiv2.options.Operation
@@ -572,6 +575,7 @@ var file_internal_descriptor_openapiconfig_openapiconfig_proto_depIdxs = []int32
 }
 
 func init() { file_internal_descriptor_openapiconfig_openapiconfig_proto_init() }
+
 func file_internal_descriptor_openapiconfig_openapiconfig_proto_init() {
 	if File_internal_descriptor_openapiconfig_openapiconfig_proto != nil {
 		return

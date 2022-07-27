@@ -5,10 +5,10 @@ package httpmw
 import (
 	"net/http"
 
-	"github.com/ra9form/yuki/transport/httptransport"
-
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+
+	"github.com/ra9form/yuki/transport/httptransport"
 )
 
 // DefaultChain is a chain that gets applied to the generated handlers.

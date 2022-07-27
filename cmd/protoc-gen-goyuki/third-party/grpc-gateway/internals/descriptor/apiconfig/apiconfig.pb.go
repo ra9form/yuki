@@ -7,11 +7,12 @@
 package apiconfig
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	annotations "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -112,10 +113,12 @@ func file_internal_descriptor_apiconfig_apiconfig_proto_rawDescGZIP() []byte {
 }
 
 var file_internal_descriptor_apiconfig_apiconfig_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+
 var file_internal_descriptor_apiconfig_apiconfig_proto_goTypes = []interface{}{
 	(*GrpcAPIService)(nil),   // 0: grpc.gateway.internal.descriptor.apiconfig.GrpcAPIService
 	(*annotations.Http)(nil), // 1: google.api.Http
 }
+
 var file_internal_descriptor_apiconfig_apiconfig_proto_depIdxs = []int32{
 	1, // 0: grpc.gateway.internal.descriptor.apiconfig.GrpcAPIService.http:type_name -> google.api.Http
 	1, // [1:1] is the sub-list for method output_type
@@ -126,6 +129,7 @@ var file_internal_descriptor_apiconfig_apiconfig_proto_depIdxs = []int32{
 }
 
 func init() { file_internal_descriptor_apiconfig_apiconfig_proto_init() }
+
 func file_internal_descriptor_apiconfig_apiconfig_proto_init() {
 	if File_internal_descriptor_apiconfig_apiconfig_proto != nil {
 		return

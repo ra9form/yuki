@@ -3,10 +3,16 @@ run:
     - vendor
     - pb
     - static
-  modules-download-mode: vendor
+    - integration
+    - cmd
+    - transport
+  modules-download-mode: mod
 
 linters:
   enable-all: true
+  disable:
+    - gochecknoglobals
+    - gci
 
 issues:
   # Restricts maximum count of issues to display with the same text, and show all instead.
@@ -22,3 +28,31 @@ linters-settings:
       use-field-name: true
       rules:
         json: snake
+  varnamelen:
+    # The longest distance, in source lines, that is being considered a "small scope".
+    # Variables used in at most this many lines will be ignored.
+    # Default: 5
+    max-distance: 10
+    # Check method receivers.
+    # Default: false
+    check-receiver: true
+    # Check named return values.
+    # Default: false
+    check-return: true
+    # Check type parameters.
+    # Default: false
+    check-type-param: true
+    # Optional list of variable names that should be ignored completely.
+    # Default: []
+    ignore-names:
+      - err
+    # Optional list of variable declarations that should be ignored completely.
+    # Entries must be in one of the following forms (see below for examples):
+    # - for variables, parameters, named return values, method receivers, or type parameters:
+    #   <name> <type>  (<type> can also be a pointer/slice/map/chan/...)
+    # - for constants: const <name>
+    #
+    # Default: []
+    ignore-decls:
+      - w http.ResponseWriter
+      - r *http.Request

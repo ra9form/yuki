@@ -15,12 +15,13 @@ import (
 	"strings"
 
 	"github.com/golang/glog"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/internal"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 	"golang.org/x/tools/imports"
 	"google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/protobuf/proto"
 	plugin "google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/internal"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
 )
 
 type Generator struct {
@@ -76,7 +77,6 @@ func (g *Generator) newGoPackage(pkgPath string, aalias ...string) descriptor.Go
 
 func (g *Generator) generateDesc(file *descriptor.File) (*plugin.CodeGeneratorResponse_File, error) {
 	descCode, err := g.getDescTemplate(g.options.SwaggerDef[file.GetName()], file)
-
 	if err != nil {
 		return nil, err
 	}
@@ -192,7 +192,6 @@ func (g *Generator) generateImplService(file *descriptor.File, svc *descriptor.S
 			output = fmt.Sprintf(filepath.Join(prefix, g.options.ImplPath, "%s.go"), implFileName(svc, nil))
 		}
 		implCode, err := g.getServiceImpl(file, svc)
-
 		if err != nil {
 			return nil, err
 		}
@@ -571,7 +570,7 @@ func getDescImportPath(file *descriptor.File) string {
 
 // getImportPath returns full go import path for specified gopkg
 // wd - current working directory
-// gopath - current gopath (can be empty if you are not in gopath)
+// gopath - current gopath (can be empty if you are not in gopath).
 func getImportPath(goPackage descriptor.GoPackage, wd, gopath string) string {
 	var wdImportPath, gopkg string
 	if goPackage.Path != "." {
@@ -660,7 +659,9 @@ func astMethodExists(typeName, methodName string, pkg *ast.Package) bool {
 }
 
 var module string
+
 var moduleDir string
+
 var moduleRegExp = regexp.MustCompile("^module (.*?)(?: //.*)?$")
 
 func guessModule() {

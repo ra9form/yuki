@@ -10,22 +10,19 @@ import (
 	"strings"
 
 	"github.com/golang/glog"
+	legacydescriptor "github.com/golang/protobuf/descriptor"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	openapi_options "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
-	gen "github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/generator"
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	//nolint:staticcheck // Known issue, will be replaced when possible
-	legacydescriptor "github.com/golang/protobuf/descriptor"
+	"github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/descriptor"
+	gen "github.com/ra9form/yuki/cmd/protoc-gen-goyuki/third-party/grpc-gateway/internals/generator"
 )
 
-var (
-	errNoTargetService = errors.New("no target service defined in the file")
-)
+var errNoTargetService = errors.New("no target service defined in the file")
 
 type generator struct {
 	reg *descriptor.Registry
@@ -46,7 +43,7 @@ func New(reg *descriptor.Registry) gen.Generator {
 	return &generator{reg: reg}
 }
 
-// Merge a lot of OpenAPI file (wrapper) to single one OpenAPI file
+// Merge a lot of OpenAPI file (wrapper) to single one OpenAPI file.
 func mergeTargetFile(targets []*wrapper, mergeFileName string) *wrapper {
 	var mergedTarget *wrapper
 	for _, f := range targets {
@@ -142,7 +139,7 @@ func extensionMarshalJSON(so interface{}, extensions []extension) ([]byte, error
 	return json.Marshal(s.Interface())
 }
 
-// encodeOpenAPI converts OpenAPI file obj to pluginpb.CodeGeneratorResponse_File
+// encodeOpenAPI converts OpenAPI file obj to pluginpb.CodeGeneratorResponse_File.
 func encodeOpenAPI(file *wrapper) (*descriptor.ResponseFile, error) {
 	var formatted bytes.Buffer
 	enc := json.NewEncoder(&formatted)
@@ -227,7 +224,7 @@ func (g *generator) Generate(targets []*descriptor.File) ([]*descriptor.Response
 }
 
 // AddErrorDefs Adds google.rpc.Status and google.protobuf.Any
-// to registry (used for error-related API responses)
+// to registry (used for error-related API responses).
 func AddErrorDefs(reg *descriptor.Registry) error {
 	// load internal protos
 	any, _ := legacydescriptor.MessageDescriptorProto(&anypb.Any{})

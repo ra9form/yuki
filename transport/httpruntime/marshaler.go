@@ -5,7 +5,6 @@ import (
 	"mime"
 	"net/http"
 	"strings"
-
 )
 
 // Marshaler is a processor that can marshal and unmarshal data to some content-type.
@@ -15,7 +14,7 @@ type Marshaler interface {
 	Marshal(io.Writer, interface{}) error
 }
 
-// func to init marshaler with Content-Type/Accept params
+// func to init marshaler with Content-Type/Accept params.
 type marshalGetterFunc = func(ContentTypeOptions) Marshaler
 
 // ContentTypeOptions are MIME annotations provided with Content-Type or Accept

@@ -114,5 +114,4 @@ func clientReqHeadersFromMD() RequestMutator {
 
 		return req, nil
 	}
-
 }

@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"runtime/debug"
 
+	"github.com/pkg/errors"
+
 	"github.com/ra9form/yuki/server/middlewares/mwcommon"
 	"github.com/ra9form/yuki/transport/httpruntime"
-
-	"github.com/pkg/errors"
 )
 
 // Recover recovers HTTP server from handlers' panics.
