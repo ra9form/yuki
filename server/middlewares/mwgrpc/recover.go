@@ -9,6 +9,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // UnaryPanicHandler handles panics for UnaryHandlers.
@@ -17,7 +18,7 @@ func UnaryPanicHandler(logger interface{}) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		defer func() {
 			if r := recover(); r != nil {
-				err = grpc.Errorf(codes.Internal, "panic: %v", r)
+				err = status.Errorf(codes.Internal, "panic: %v", r)
 				logFunc(ctx, fmt.Sprintf("recovered from panic: %v,\n%v ", r, string(debug.Stack())))
 			}
 		}()
