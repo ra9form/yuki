@@ -10,8 +10,8 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	strings_pb "github.com/utrack/clay/integration/binding_with_different_types_post/pb"
-	strings_srv "github.com/utrack/clay/integration/binding_with_different_types_post/strings"
+	strings_pb "github.com/utrack/yuki/integration/binding_with_different_types_post/pb"
+	strings_srv "github.com/utrack/yuki/integration/binding_with_different_types_post/strings"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )

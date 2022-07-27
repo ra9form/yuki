@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	strings_pb "github.com/utrack/clay/integration/no_panic_in_response_marshaler_for_timestamp/pb"
-	strings_srv "github.com/utrack/clay/integration/no_panic_in_response_marshaler_for_timestamp/strings"
+	strings_pb "github.com/utrack/yuki/integration/no_panic_in_response_marshaler_for_timestamp/pb"
+	strings_srv "github.com/utrack/yuki/integration/no_panic_in_response_marshaler_for_timestamp/strings"
 )
 
 func TestEcho(t *testing.T) {

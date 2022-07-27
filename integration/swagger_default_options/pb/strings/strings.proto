@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package="github.com/utrack/clay/integration/swagger_default_options/pb/strings;strings";
+option go_package="github.com/utrack/yuki/integration/swagger_default_options/pb/strings;strings";
 // or just
 //option go_package="./pb/strings;strings";
 

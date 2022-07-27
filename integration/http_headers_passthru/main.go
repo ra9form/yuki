@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/http_headers_passthru/strings"
+	"github.com/utrack/yuki/integration/http_headers_passthru/strings"
 )
 
 func main() {

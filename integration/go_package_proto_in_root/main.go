@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/go_package_proto_in_root/strings"
+	"github.com/utrack/yuki/integration/go_package_proto_in_root/strings"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/partial_bindings/strings"
+	"github.com/utrack/yuki/integration/partial_bindings/strings"
 )
 
 func main() {

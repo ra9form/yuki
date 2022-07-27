@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/gogo/protobuf/types"
-	strings_pb "github.com/utrack/clay/integration/response_vs_response_body/pb"
-	strings_srv "github.com/utrack/clay/integration/response_vs_response_body/strings"
+	strings_pb "github.com/utrack/yuki/integration/response_vs_response_body/pb"
+	strings_srv "github.com/utrack/yuki/integration/response_vs_response_body/strings"
 	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )

@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/go-openapi/spec"
-	"github.com/utrack/clay/integration/binding_with_body_and_response/strings"
+	"github.com/utrack/yuki/integration/binding_with_body_and_response/strings"
 )
 
 func TestToUpper(t *testing.T) {

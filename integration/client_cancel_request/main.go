@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/client_cancel_request/app/strings"
+	"github.com/utrack/yuki/integration/client_cancel_request/app/strings"
 )
 
 func main() {

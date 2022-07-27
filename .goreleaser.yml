@@ -4,7 +4,7 @@ before:
 builds:
 - env:
   - CGO_ENABLED=0
-  main: ./cmd/protoc-gen-goclay
+  main: ./cmd/protoc-gen-goyuki
 archives:
 - replacements:
     darwin: Darwin

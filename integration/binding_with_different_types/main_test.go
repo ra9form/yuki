@@ -9,8 +9,8 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	strings_pb "github.com/utrack/clay/integration/binding_with_different_types/pb"
-	strings_srv "github.com/utrack/clay/integration/binding_with_different_types/strings"
+	strings_pb "github.com/utrack/yuki/integration/binding_with_different_types/pb"
+	strings_srv "github.com/utrack/yuki/integration/binding_with_different_types/strings"
 )
 
 func TestEcho(t *testing.T) {

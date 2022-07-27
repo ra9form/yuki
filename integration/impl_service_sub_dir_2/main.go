@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/impl_service_sub_dir_2/strings"
-	"github.com/utrack/clay/integration/impl_service_sub_dir_2/strings-api"
+	"github.com/utrack/yuki/integration/impl_service_sub_dir_2/strings"
+	"github.com/utrack/yuki/integration/impl_service_sub_dir_2/strings-api"
 )
 
 func main() {

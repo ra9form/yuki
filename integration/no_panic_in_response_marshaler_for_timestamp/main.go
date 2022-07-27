@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/no_panic_in_response_marshaler_for_timestamp/strings"
+	"github.com/utrack/yuki/integration/no_panic_in_response_marshaler_for_timestamp/strings"
 )
 
 func main() {

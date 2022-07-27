@@ -6,7 +6,7 @@ pwd:
 clean:
 	rm -f ./pb/strings/strings.pb.go
 	rm -f ./pb/strings/strings_grpc.pb.go
-	rm -f ./pb/strings/strings.pb.goclay.go
+	rm -f ./pb/strings/strings.pb.goyuki.go
 	rm -f ./strings/strings_service.go
 	rm -f ./strings/to_upper.go
 	rm -f ./strings/to_upper_test.go

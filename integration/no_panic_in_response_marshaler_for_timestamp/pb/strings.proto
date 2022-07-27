@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package="github.com/utrack/clay/integration/no_panic_in_response_marshaler_for_timestamp/pb;strings";
+option go_package="github.com/utrack/yuki/integration/no_panic_in_response_marshaler_for_timestamp/pb;strings";
 // or just
 //option go_package="./pb;strings";
 

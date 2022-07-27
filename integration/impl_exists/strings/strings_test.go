@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	desc "github.com/utrack/clay/integration/impl_exists/pb"
+	desc "github.com/utrack/yuki/integration/impl_exists/pb"
 )
 
 // TestImplementationExists tests if the implementation is not re-written after generation

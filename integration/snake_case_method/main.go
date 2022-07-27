@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/snake_case_method/strings"
+	"github.com/utrack/yuki/integration/snake_case_method/strings"
 )
 
 func main() {

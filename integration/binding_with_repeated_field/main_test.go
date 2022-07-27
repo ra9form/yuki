@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	strings_pb "github.com/utrack/clay/integration/binding_with_repeated_field/pb"
-	strings_srv "github.com/utrack/clay/integration/binding_with_repeated_field/strings"
+	strings_pb "github.com/utrack/yuki/integration/binding_with_repeated_field/pb"
+	strings_srv "github.com/utrack/yuki/integration/binding_with_repeated_field/strings"
 )
 
 func TestToUpper(t *testing.T) {

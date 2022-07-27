@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/impl_standalone_without_swagger/strings"
+	"github.com/utrack/yuki/integration/impl_standalone_without_swagger/strings"
 )
 
 func main() {

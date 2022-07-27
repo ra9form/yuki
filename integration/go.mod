@@ -1,4 +1,4 @@
-module github.com/utrack/clay/integration
+module github.com/utrack/yuki/integration
 
 require (
 	github.com/go-chi/chi v3.3.4+incompatible

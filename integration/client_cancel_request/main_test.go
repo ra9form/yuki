@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	strings_app "github.com/utrack/clay/integration/client_cancel_request/app/strings"
-	strings_pb "github.com/utrack/clay/integration/client_cancel_request/pkg/strings"
+	strings_app "github.com/utrack/yuki/integration/client_cancel_request/app/strings"
+	strings_pb "github.com/utrack/yuki/integration/client_cancel_request/pkg/strings"
 )
 
 func TestCancelRequest(t *testing.T) {

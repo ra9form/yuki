@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/swagger_def_sam_json_case/strings"
+	"github.com/utrack/yuki/integration/swagger_def_sam_json_case/strings"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/utrack/clay/integration/response_vs_response_body/strings"
+	"github.com/utrack/yuki/integration/response_vs_response_body/strings"
 )
 
 func main() {

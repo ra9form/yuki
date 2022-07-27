@@ -24,7 +24,7 @@ func TestBindingSubstruct(t *testing.T) {
 
 	got := String{}
 
-	f := unmarshaler_goclay_Strings_ToUpper_0(req)
+	f := unmarshaler_goyuki_Strings_ToUpper_0(req)
 	err = f(&got)
 	so.Nil(err)
 	so.Equal(int32(123), got.Substruct.Id)

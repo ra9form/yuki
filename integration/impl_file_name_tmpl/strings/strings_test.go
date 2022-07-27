@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	desc "github.com/utrack/clay/integration/impl_file_name_tmpl/pb"
+	desc "github.com/utrack/yuki/integration/impl_file_name_tmpl/pb"
 )
 
 // TestImplementationExists tests if the implementation is not re-written after generation

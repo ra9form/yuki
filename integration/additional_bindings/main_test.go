@@ -9,8 +9,8 @@ import (
 
 	"github.com/go-chi/chi"
 
-	strings_pb "github.com/utrack/clay/integration/additional_bindings/pb"
-	strings_srv "github.com/utrack/clay/integration/additional_bindings/strings"
+	strings_pb "github.com/utrack/yuki/integration/additional_bindings/pb"
+	strings_srv "github.com/utrack/yuki/integration/additional_bindings/strings"
 )
 
 func TestToUpper(t *testing.T) {
