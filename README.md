@@ -1,6 +1,6 @@
 # yuki
 
-[//]: # ([![Build Status]&#40;https://travis-ci.org/utrack/yuki.svg?branch=master&#41;]&#40;https://travis-ci.org/utrack/yuki&#41;)
+[//]: # (c[![Build Status]&#40;https://travis-ci.org/utrack/yuki.svg?branch=master&#41;]&#40;https://travis-ci.org/utrack/yuki&#41;)
 
 Minimal server platform for gRPC and REST+Swagger APIs in Go
 
