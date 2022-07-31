@@ -7,7 +7,7 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"google.golang.org/grpc"
 
-	"github.com/ra9form/yuki/server/middleware/http"
+	httpMW "github.com/ra9form/yuki/server/middleware/http"
 	"github.com/ra9form/yuki/transport"
 )
 
@@ -50,7 +50,7 @@ func WithHTTPPort(port int) Option {
 }
 
 // WithHTTPMiddlewares sets up HTTP middleware to work with.
-func WithHTTPMiddlewares(mws ...http.Middleware) Option {
+func WithHTTPMiddlewares(mws ...httpMW.Middleware) Option {
 	mwGeneric := make([]func(http.Handler) http.Handler, 0, len(mws))
 	for _, mw := range mws {
 		mwGeneric = append(mwGeneric, mw)
