@@ -64,5 +64,5 @@ func newListener(port int) (net.Listener, error) {
 		time.Sleep(listenRetryWait)
 	}
 
-	return nil, err
+	return nil, errors.Wrap(err, "could not start net.Listener")
 }

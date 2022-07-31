@@ -29,56 +29,58 @@ func NewServer(rpcPort int, opts ...Option) *Server {
 		opt(serverOpts)
 	}
 
-	return &Server{opts: serverOpts}
+	return &Server{
+		opts: serverOpts,
+	}
 }
 
 // Run starts processing requests to the service.
 // It blocks indefinitely, run asynchronously to do anything after that.
-func (s *Server) Run(svc transport.Service) error {
+func (srv *Server) Run(svc transport.Service) error {
 	desc := svc.GetDescription()
 
 	var err error
 
-	s.listeners, err = newListenerSet(s.opts)
+	srv.listeners, err = newListenerSet(srv.opts)
 	if err != nil {
 		return errors.Wrap(err, "couldn't create listeners")
 	}
 
-	s.srv = newServerSet(s.listeners, s.opts)
+	srv.srv = newServerSet(srv.listeners, srv.opts)
 	// Inject static Swagger as root handler
-	s.srv.http.HandleFunc("/swagger.json", func(w http.ResponseWriter, req *http.Request) {
+	srv.srv.http.HandleFunc("/swagger.json", func(w http.ResponseWriter, req *http.Request) {
 		io.Copy(w, bytes.NewReader(desc.SwaggerDef()))
 	})
 
 	// apply gRPC interceptor
 	if d, ok := desc.(transport.ConfigurableServiceDesc); ok {
-		d.Apply(transport.WithUnaryInterceptor(s.opts.GRPCUnaryInterceptor))
+		d.Apply(transport.WithUnaryInterceptor(srv.opts.GRPCUnaryInterceptor))
 	}
 
 	// Register everything
-	desc.RegisterHTTP(s.srv.http)
-	desc.RegisterGRPC(s.srv.grpc)
+	desc.RegisterHTTP(srv.srv.http)
+	desc.RegisterGRPC(srv.srv.grpc)
 
-	return s.run()
+	return srv.run()
 }
 
-func (s *Server) run() error {
+func (srv *Server) run() error {
 	errChan := make(chan error, maxRunErrs)
 
-	if s.listeners.mainListener != nil {
+	if srv.listeners.mainListener != nil {
 		go func() {
-			err := s.listeners.mainListener.Serve()
+			err := srv.listeners.mainListener.Serve()
 			errChan <- err
 		}()
 	}
 
 	go func() {
-		err := http.Serve(s.listeners.HTTP, s.srv.http)
+		err := http.Serve(srv.listeners.HTTP, srv.srv.http)
 		errChan <- err
 	}()
 
 	go func() {
-		err := s.srv.grpc.Serve(s.listeners.GRPC)
+		err := srv.srv.grpc.Serve(srv.listeners.GRPC)
 		errChan <- err
 	}()
 
@@ -86,7 +88,7 @@ func (s *Server) run() error {
 }
 
 // Stop stops the server gracefully.
-func (s *Server) Stop() {
+func (srv *Server) Stop() {
 	// TODO grace HTTP
-	s.srv.grpc.GracefulStop()
+	srv.srv.grpc.GracefulStop()
 }
