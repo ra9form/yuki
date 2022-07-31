@@ -15,10 +15,9 @@ linters:
     - gochecknoglobals
     - gci
     - nonamedreturns
+    - godox
 
 issues:
-  exclude:
-    - "Line contains TODO/BUG/FIXME: \"TODO grace HTTP\""
   # Restricts maximum count of issues to display with the same text, and show all instead.
   max-same-issues: 0
   max-issues-per-linter: 0
