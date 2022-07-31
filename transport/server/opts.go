@@ -5,7 +5,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/ra9form/yuki/server"
-	"github.com/ra9form/yuki/server/middlewares/mwhttp"
+	"github.com/ra9form/yuki/server/middleware/http"
 	"github.com/ra9form/yuki/transport"
 )
 
@@ -23,17 +23,17 @@ func WithHTTPPort(port int) Option {
 	return server.WithHTTPPort(port)
 }
 
-// WithHTTPMiddlewares sets up HTTP middlewares to work with.
-func WithHTTPMiddlewares(mws ...mwhttp.Middleware) Option {
+// WithHTTPMiddlewares sets up HTTP middleware to work with.
+func WithHTTPMiddlewares(mws ...http.Middleware) Option {
 	return server.WithHTTPMiddlewares(mws...)
 }
 
-// WithGRPCUnaryMiddlewares sets up unary middlewares for gRPC server.
+// WithGRPCUnaryMiddlewares sets up unary middleware for gRPC server.
 func WithGRPCUnaryMiddlewares(mws ...grpc.UnaryServerInterceptor) Option {
 	return server.WithGRPCUnaryMiddlewares(mws...)
 }
 
-// WithGRPCStreamMiddlewares sets up stream middlewares for gRPC server.
+// WithGRPCStreamMiddlewares sets up stream middleware for gRPC server.
 func WithGRPCStreamMiddlewares(mws ...grpc.StreamServerInterceptor) Option {
 	return server.WithGRPCStreamMiddlewares(mws...)
 }

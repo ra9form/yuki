@@ -15,11 +15,13 @@ func newServerSet(listeners *listenerSet, opts *serverOpts) *serverSet {
 	if len(opts.HTTPMiddlewares) > 0 {
 		http.Use(opts.HTTPMiddlewares...)
 	}
+
 	http.Mount("/", opts.HTTPMux)
 
 	srv := &serverSet{
 		grpc: grpc.NewServer(opts.GRPCOpts...),
 		http: http,
 	}
+
 	return srv
 }

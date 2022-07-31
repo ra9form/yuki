@@ -1,4 +1,4 @@
-/*Package httpmw provides middlewares that are automatically
+/*Package httpmw provides middleware that are automatically
 used by the generated code.*/
 package httpmw
 

@@ -1,4 +1,4 @@
-package mwhttp
+package http
 
 import "net/http"
 

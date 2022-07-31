@@ -1,3 +1,4 @@
+# TODO remove unnecessary skip-dirs
 run:
   skip-dirs:
     - vendor
@@ -13,8 +14,11 @@ linters:
   disable:
     - gochecknoglobals
     - gci
+    - nonamedreturns
 
 issues:
+  exclude:
+    - "Line contains TODO/BUG/FIXME: \"TODO grace HTTP\""
   # Restricts maximum count of issues to display with the same text, and show all instead.
   max-same-issues: 0
   max-issues-per-linter: 0

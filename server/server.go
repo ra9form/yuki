@@ -10,6 +10,8 @@ import (
 	"github.com/ra9form/yuki/transport"
 )
 
+const maxRunErrs = 5
+
 // Server is a transport server.
 type Server struct {
 	opts      *serverOpts
@@ -26,6 +28,7 @@ func NewServer(rpcPort int, opts ...Option) *Server {
 	for _, opt := range opts {
 		opt(serverOpts)
 	}
+
 	return &Server{opts: serverOpts}
 }
 
@@ -35,6 +38,7 @@ func (s *Server) Run(svc transport.Service) error {
 	desc := svc.GetDescription()
 
 	var err error
+
 	s.listeners, err = newListenerSet(s.opts)
 	if err != nil {
 		return errors.Wrap(err, "couldn't create listeners")
@@ -59,7 +63,7 @@ func (s *Server) Run(svc transport.Service) error {
 }
 
 func (s *Server) run() error {
-	errChan := make(chan error, 5)
+	errChan := make(chan error, maxRunErrs)
 
 	if s.listeners.mainListener != nil {
 		go func() {
@@ -67,10 +71,12 @@ func (s *Server) run() error {
 			errChan <- err
 		}()
 	}
+
 	go func() {
 		err := http.Serve(s.listeners.HTTP, s.srv.http)
 		errChan <- err
 	}()
+
 	go func() {
 		err := s.srv.grpc.Serve(s.listeners.GRPC)
 		errChan <- err
