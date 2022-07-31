@@ -7,7 +7,7 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"google.golang.org/grpc"
 
-	"github.com/ra9form/yuki/server/middlewares/mwhttp"
+	httpMW "github.com/ra9form/yuki/server/middleware/http"
 	"github.com/ra9form/yuki/transport"
 )
 
@@ -31,6 +31,11 @@ func defaultServerOpts(mainPort int) *serverOpts {
 		RPCPort:  mainPort,
 		HTTPPort: mainPort,
 		HTTPMux:  chi.NewMux(),
+
+		HTTPMiddlewares: nil,
+
+		GRPCOpts:             nil,
+		GRPCUnaryInterceptor: nil,
 	}
 }
 
@@ -49,27 +54,29 @@ func WithHTTPPort(port int) Option {
 	}
 }
 
-// WithHTTPMiddlewares sets up HTTP middlewares to work with.
-func WithHTTPMiddlewares(mws ...mwhttp.Middleware) Option {
+// WithHTTPMiddlewares sets up HTTP middleware to work with.
+func WithHTTPMiddlewares(mws ...httpMW.Middleware) Option {
 	mwGeneric := make([]func(http.Handler) http.Handler, 0, len(mws))
 	for _, mw := range mws {
 		mwGeneric = append(mwGeneric, mw)
 	}
+
 	return func(o *serverOpts) {
 		o.HTTPMiddlewares = mwGeneric
 	}
 }
 
-// WithGRPCUnaryMiddlewares sets up unary middlewares for gRPC server.
+// WithGRPCUnaryMiddlewares sets up unary middleware for gRPC server.
 func WithGRPCUnaryMiddlewares(mws ...grpc.UnaryServerInterceptor) Option {
 	mw := grpc_middleware.ChainUnaryServer(mws...)
+
 	return func(o *serverOpts) {
 		o.GRPCOpts = append(o.GRPCOpts, grpc.UnaryInterceptor(mw))
 		o.GRPCUnaryInterceptor = mw
 	}
 }
 
-// WithGRPCStreamMiddlewares sets up stream middlewares for gRPC server.
+// WithGRPCStreamMiddlewares sets up stream middleware for gRPC server.
 func WithGRPCStreamMiddlewares(mws ...grpc.StreamServerInterceptor) Option {
 	return func(o *serverOpts) {
 		o.GRPCOpts = append(o.GRPCOpts, grpc.StreamInterceptor(grpc_middleware.ChainStreamServer(mws...)))

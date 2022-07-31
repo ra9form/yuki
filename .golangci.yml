@@ -1,3 +1,4 @@
+# TODO remove unnecessary skip-dirs
 run:
   skip-dirs:
     - vendor
@@ -13,6 +14,8 @@ linters:
   disable:
     - gochecknoglobals
     - gci
+    - nonamedreturns
+    - godox
 
 issues:
   # Restricts maximum count of issues to display with the same text, and show all instead.

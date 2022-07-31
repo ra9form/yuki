@@ -21,8 +21,13 @@ type listenerSet struct {
 }
 
 func newListenerSet(opts *serverOpts) (*listenerSet, error) {
-	liSet := &listenerSet{}
 	var err error
+
+	liSet := &listenerSet{
+		mainListener: nil,
+		HTTP:         nil,
+		GRPC:         nil,
+	}
 
 	liSet.GRPC, err = newListener(opts.RPCPort)
 	if err != nil {
@@ -37,6 +42,7 @@ func newListenerSet(opts *serverOpts) (*listenerSet, error) {
 	} else {
 		liSet.HTTP, err = newListener(opts.HTTPPort)
 	}
+
 	if err != nil {
 		return nil, errors.Wrap(err, "couldn't create HTTP listener")
 	}
@@ -47,15 +53,20 @@ func newListenerSet(opts *serverOpts) (*listenerSet, error) {
 // newListener start net.Listener on a port.
 // It keeps retrying if port is already in use.
 func newListener(port int) (net.Listener, error) {
-	var listener net.Listener
-	var err error
+	var (
+		listener net.Listener
+		err      error
+	)
+
 	start := time.Now()
 	for time.Since(start) < listenRetryDuration {
 		listener, err = net.Listen("tcp", net.JoinHostPort("", strconv.Itoa(port)))
 		if err == nil {
 			return listener, nil
 		}
+
 		time.Sleep(listenRetryWait)
 	}
-	return nil, err
+
+	return nil, errors.Wrap(err, "could not start net.Listener")
 }
