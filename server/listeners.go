@@ -23,7 +23,11 @@ type listenerSet struct {
 func newListenerSet(opts *serverOpts) (*listenerSet, error) {
 	var err error
 
-	liSet := &listenerSet{}
+	liSet := &listenerSet{
+		mainListener: nil,
+		HTTP:         nil,
+		GRPC:         nil,
+	}
 
 	liSet.GRPC, err = newListener(opts.RPCPort)
 	if err != nil {
