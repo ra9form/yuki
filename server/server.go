@@ -30,7 +30,9 @@ func NewServer(rpcPort int, opts ...Option) *Server {
 	}
 
 	return &Server{
-		opts: serverOpts,
+		opts:      serverOpts,
+		listeners: nil,
+		srv:       nil,
 	}
 }
 
@@ -49,7 +51,7 @@ func (srv *Server) Run(svc transport.Service) error {
 	srv.srv = newServerSet(srv.listeners, srv.opts)
 	// Inject static Swagger as root handler
 	srv.srv.http.HandleFunc("/swagger.json", func(w http.ResponseWriter, req *http.Request) {
-		io.Copy(w, bytes.NewReader(desc.SwaggerDef()))
+		_, _ = io.Copy(w, bytes.NewReader(desc.SwaggerDef()))
 	})
 
 	// apply gRPC interceptor

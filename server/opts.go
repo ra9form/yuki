@@ -31,6 +31,11 @@ func defaultServerOpts(mainPort int) *serverOpts {
 		RPCPort:  mainPort,
 		HTTPPort: mainPort,
 		HTTPMux:  chi.NewMux(),
+
+		HTTPMiddlewares: nil,
+
+		GRPCOpts:             nil,
+		GRPCUnaryInterceptor: nil,
 	}
 }
 
